@@ -53,15 +53,4 @@ public class GatewayController {
     public ResponseEntity<Object> getProduct(@PathVariable UUID uuid){
         return ResponseEntity.ok(gateway.getProduct(uuid));
     }
-
-    /**
-     * CSV Export in der Application
-     * @return leeres ResponseEntity<Object>
-     */
-    @GetMapping("product/export")
-    public ResponseEntity<Object> exportProduct(){
-        gateway.exportProduct();
-        return ResponseEntity.ok(null);
-    }
-    
 }

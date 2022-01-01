@@ -24,10 +24,4 @@ public class GatewayService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Object.class);
     }
-
-    public void exportProduct(){
-        final String uri = "http://localhost:8080/api/v1/product/export";
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getForObject(uri, Object.class);
-    }
 }
