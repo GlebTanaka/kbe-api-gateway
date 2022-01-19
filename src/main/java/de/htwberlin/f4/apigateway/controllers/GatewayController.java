@@ -25,19 +25,13 @@ public class GatewayController {
     @Autowired
     private GatewayService gateway;
 
-    /**
-     * liefert die Mehrwertsteuer zum Preis
-     * @param preis als double
-     * @return ResponseEntity<Double> enthält die Mehrwertsteuer
-     */
     @GetMapping("/calculatemehrwertsteuer")
     public ResponseEntity<Double> getMehrwertSteuer(@RequestParam @NotNull @Min(0) double preis){
         return ResponseEntity.ok(gateway.getMehrwertsteuer(preis));
     }
 
     /**
-     * Liefert alle Produkte von dem application microservice
-     * @return ResponseEntity<Object> produkte
+     * @return products, each contains uuid and name
      */
     @GetMapping("/product")
     public ResponseEntity<Object> getProducts(){
@@ -45,9 +39,8 @@ public class GatewayController {
     }
 
     /**
-     * Liefert alle Produktdeteils von einem Produkt
-     * @param uuid des ausgewählten Produkts
-     * @return ResponseEntity<Object> alle Produktdeteils
+     * @param uuid from Product
+     * @return productdetails
      */
     @GetMapping("/product/{uuid}")
     public ResponseEntity<Object> getProduct(@PathVariable UUID uuid){

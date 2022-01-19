@@ -7,20 +7,24 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class GatewayService {
+
+    private final String productApi = "http://localhost:8080/api/v1/product";
+    private final String calculatorApi = "http://localhost:8081/api/v1/calculator";
+
     public Double getMehrwertsteuer(double price){
-        final String uri = "http://localhost:8081/api/v1/calculator/calculatemehrwertsteuer?preis=" + price;
+        final String uri = calculatorApi + "/calculatemehrwertsteuer?preis=" + price;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Double.class);
     }
 
     public Object getProducts(){
-        final String uri = "http://localhost:8080/api/v1/product";
+        final String uri = productApi;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Object.class);
     }
 
     public Object getProduct(UUID id){
-        final String uri = "http://localhost:8080/api/v1/product/" + id;
+        final String uri = productApi + "/" + id;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Object.class);
     }
