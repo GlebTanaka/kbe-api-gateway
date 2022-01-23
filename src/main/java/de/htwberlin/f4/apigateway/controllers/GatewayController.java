@@ -1,5 +1,6 @@
 package de.htwberlin.f4.apigateway.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import de.htwberlin.f4.apigateway.services.GatewayService;
@@ -23,6 +24,7 @@ public class GatewayController {
     private GatewayService gateway;
 
     @GetMapping("/calculatemehrwertsteuer")
+    @Operation(summary = "Calculate Mehrwersteuer", description = "Provide a price greater than zero to calculate the Mehrwertstuer of this price")
     public ResponseEntity<Double> getMehrwertSteuer(@RequestParam @NotNull @Min(0) double preis){
         return ResponseEntity.ok(gateway.getMehrwertsteuer(preis));
     }
@@ -31,6 +33,7 @@ public class GatewayController {
      * @return products, each contains uuid and name
      */
     @GetMapping("/product")
+    @Operation(summary = "Get Product List", description = "A List of all Products containing the name and ID")
     public ResponseEntity<Object> getProducts(){
         return ResponseEntity.ok(gateway.getProducts());
     }
@@ -40,6 +43,7 @@ public class GatewayController {
      * @return productdetails
      */
     @GetMapping("/product/{uuid}")
+    @Operation(summary = "Get Product Information", description = "Provide a matching UUID to retrieve Information of the Product")
     public ResponseEntity<Object> getProduct(@PathVariable UUID uuid){
         return ResponseEntity.ok(gateway.getProduct(uuid));
     }
