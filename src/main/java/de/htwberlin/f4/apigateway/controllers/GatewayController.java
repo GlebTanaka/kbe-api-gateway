@@ -20,8 +20,12 @@ import org.springframework.validation.annotation.Validated;
 @RequestMapping(path = "api/v1/gateway")
 public class GatewayController {
 
+    private final GatewayService gateway;
+
     @Autowired
-    private GatewayService gateway;
+    public GatewayController(GatewayService gateway) {
+        this.gateway = gateway;
+    }
 
     @GetMapping("/calculatemehrwertsteuer")
     @Operation(summary = "Calculate Mehrwersteuer", description = "Provide a price greater than zero to calculate the Mehrwertstuer of this price")
@@ -29,19 +33,12 @@ public class GatewayController {
         return ResponseEntity.ok(gateway.getMehrwertsteuer(preis));
     }
 
-    /**
-     * @return products, each contains uuid and name
-     */
     @GetMapping("/product")
     @Operation(summary = "Get Product List", description = "A List of all Products containing the name and ID")
     public ResponseEntity<Object> getProducts(){
         return ResponseEntity.ok(gateway.getProducts());
     }
 
-    /**
-     * @param uuid from Product
-     * @return productdetails
-     */
     @GetMapping("/product/{uuid}")
     @Operation(summary = "Get Product Information", description = "Provide a matching UUID to retrieve Information of the Product")
     public ResponseEntity<Object> getProduct(@PathVariable UUID uuid){
