@@ -1,0 +1,10 @@
+version: "3.9"
+
+### API Spring Boot ###
+services:
+  gateway_api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8082:3033"
