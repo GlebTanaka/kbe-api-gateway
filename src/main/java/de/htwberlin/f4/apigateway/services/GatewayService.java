@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class GatewayService {
 
-    private final String productApi = "http://localhost:8080/api/v1/product";
-    private final String calculatorApi = "http://localhost:8081/api/v1/calculator";
+    private final String productApi = "http://host.docker.internal:8080/api/v1/product";
+    private final String calculatorApi = "http://host.docker.internal:8081/api/v1/calculator";
 
     public Double getMehrwertsteuer(double price) {
         final String uri = calculatorApi + "/calculatemehrwertsteuer?preis=" + price;
